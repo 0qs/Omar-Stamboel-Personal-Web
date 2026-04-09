@@ -1,15 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <section
       id="home"
@@ -35,9 +24,12 @@ export default function Hero() {
       <div style={{ position: "relative", zIndex: 1 }}>
         {/* Status badge */}
         <div
-          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"
-            }`}
-          style={{ marginBottom: "32px" }}
+          className="hero-animate"
+          style={{
+            marginBottom: "32px",
+            animation: "hero-fade-down 0.7s ease-out both",
+            animationDelay: "0ms",
+          }}
         >
           <span className="label-badge">
             <span
@@ -56,8 +48,11 @@ export default function Hero() {
 
         {/* Name */}
         <div
-          className={`transition-all duration-1000 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+          className="hero-animate"
+          style={{
+            animation: "hero-fade-up 1s ease-out both",
+            animationDelay: "80ms",
+          }}
         >
           <h1
             className="gradient-text"
@@ -77,10 +72,10 @@ export default function Hero() {
 
         {/* Divider */}
         <div
-          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100" : "opacity-0"
-            }`}
+          className="hero-animate"
           style={{
-            transitionDelay: "300ms",
+            animation: "hero-fade-in 0.7s ease-out both",
+            animationDelay: "300ms",
             margin: "40px 0",
             height: "1px",
             background:
@@ -90,10 +85,10 @@ export default function Hero() {
 
         {/* Subtitle */}
         <div
-          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+          className="hero-animate"
           style={{
-            transitionDelay: "400ms",
+            animation: "hero-fade-up 0.7s ease-out both",
+            animationDelay: "400ms",
             display: "flex",
             flexDirection: "column",
             gap: "8px",
@@ -129,10 +124,10 @@ export default function Hero() {
 
         {/* CTA buttons */}
         <div
-          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+          className="hero-animate"
           style={{
-            transitionDelay: "550ms",
+            animation: "hero-fade-up 0.7s ease-out both",
+            animationDelay: "550ms",
             display: "flex",
             gap: "12px",
             flexWrap: "wrap",
@@ -186,10 +181,10 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className={`transition-all duration-700 ease-out ${mounted ? "opacity-100" : "opacity-0"
-          }`}
+        className="hero-animate"
         style={{
-          transitionDelay: "800ms",
+          animation: "hero-fade-in 0.7s ease-out both",
+          animationDelay: "800ms",
           position: "absolute",
           bottom: "40px",
           left: "24px",
