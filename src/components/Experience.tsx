@@ -1,9 +1,11 @@
+import Image from "next/image";
 import AnimateIn from "./AnimateIn";
 
 const experiences = [
   {
     company: "PwC Southeast Asia Consulting",
     abbr: "PwC",
+    logo: "/PwCLogo.png",
     role: "FS Strategy and Operations Intern",
     period: "Jan 2025 – Dec 2025",
     status: "past",
@@ -19,6 +21,7 @@ const experiences = [
   {
     company: "Westbike",
     abbr: "WB",
+    logo: "/WestbikeLogo.jpeg",
     role: "UI/UX Designer Intern",
     period: "Jul 2023 – Dec 2023",
     status: "past",
@@ -96,26 +99,29 @@ export default function Experience() {
                     marginBottom: "16px",
                   }}
                 >
-                  {/* Company monogram */}
+                  {/* Company logo */}
                   <div
                     style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(255,255,255,0.06)",
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      overflow: "hidden",
                       border: "1px solid rgba(255,255,255,0.1)",
+                      flexShrink: 0,
+                      background: "#ffffff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontFamily: "var(--font-geist-mono)",
-                      fontSize: "11px",
-                      fontWeight: 700,
-                      color: "#888888",
-                      letterSpacing: "0.04em",
-                      flexShrink: 0,
+                      padding: "5px",
                     }}
                   >
-                    {exp.abbr}
+                    <Image
+                      src={exp.logo}
+                      alt={exp.company}
+                      width={40}
+                      height={40}
+                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                    />
                   </div>
                   <div>
                     <p
