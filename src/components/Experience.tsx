@@ -39,31 +39,23 @@ export default function Experience() {
   return (
     <section
       id="work"
-      style={{
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "96px 24px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
+      className="mx-auto px-6 py-16 md:py-24 border-t border-white/[0.06]"
+      style={{ maxWidth: "1100px" }}
     >
       <AnimateIn>
-        <span
-          className="label-badge"
-          style={{ marginBottom: "48px", display: "inline-flex" }}
-        >
+        <span className="label-badge mb-6 md:mb-12">
           Work Experience
         </span>
       </AnimateIn>
 
       <AnimateIn delay={80}>
         <h2
-          className="gradient-text"
+          className="gradient-text mb-6 md:mb-12"
           style={{
             fontSize: "clamp(26px, 3vw, 40px)",
             fontWeight: 600,
             lineHeight: 1.2,
             letterSpacing: "-0.02em",
-            marginBottom: "48px",
             marginTop: "12px",
           }}
         >
@@ -71,13 +63,7 @@ export default function Experience() {
         </h2>
       </AnimateIn>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "16px",
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {experiences.map((exp, i) => (
           <AnimateIn key={exp.company} delay={i * 120 + 80}>
             <div

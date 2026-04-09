@@ -33,30 +33,16 @@ export default function Contact() {
   return (
     <footer
       id="contact"
-      style={{
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "96px 24px 80px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
+      className="mx-auto px-6 py-16 md:py-24 border-t border-white/[0.06]"
+      style={{ maxWidth: "1100px" }}
     >
       <AnimateIn>
-        <span
-          className="label-badge"
-          style={{ marginBottom: "48px", display: "inline-flex" }}
-        >
+        <span className="label-badge mb-6 md:mb-12">
           Contact
         </span>
       </AnimateIn>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "64px",
-          marginTop: "12px",
-        }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mt-3">
         {/* Left: CTA */}
         <div>
           <AnimateIn delay={80}>
@@ -156,6 +142,7 @@ export default function Contact() {
                       textDecoration: "none",
                       transition: "color 0.2s",
                       textAlign: "right",
+                      wordBreak: "break-all",
                     }}
                     onMouseEnter={(e) =>
                       ((e.currentTarget as HTMLElement).style.color = "#3291ff")
@@ -173,6 +160,7 @@ export default function Contact() {
                       fontSize: "13px",
                       color: "#888888",
                       textAlign: "right",
+                      wordBreak: "break-all",
                     }}
                   >
                     {item.value}
@@ -187,11 +175,11 @@ export default function Contact() {
       {/* Footer bottom */}
       <AnimateIn delay={300}>
         <div
+          className="mt-10 md:mt-20"
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: "80px",
             paddingTop: "24px",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             flexWrap: "wrap",

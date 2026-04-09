@@ -36,29 +36,22 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      style={{
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "96px 24px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
+      className="mx-auto px-6 py-16 md:py-24 border-t border-white/[0.06]"
+      style={{ maxWidth: "1100px" }}
     >
       <AnimateIn>
-        <span
-          className="label-badge"
-          style={{ marginBottom: "48px", display: "inline-flex" }}
-        >
+        <span className="label-badge mb-6 md:mb-12">
           Skills
         </span>
       </AnimateIn>
 
       <div
+        className="mb-6 md:mb-12"
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
           gap: "24px",
-          marginBottom: "48px",
           flexWrap: "wrap",
           marginTop: "12px",
         }}
@@ -79,14 +72,7 @@ export default function Skills() {
       </div>
 
       {/* Skills grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-          gap: "16px",
-          marginBottom: "16px",
-        }}
-      >
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         {skillGroups.map((group, i) => (
           <AnimateIn key={group.category} delay={i * 80 + 80}>
             <div className="card" style={{ padding: "24px", height: "100%" }}>

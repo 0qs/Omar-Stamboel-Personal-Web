@@ -21,6 +21,15 @@ export default function AnimateIn({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // iOS Safari fix: IntersectionObserver may not fire for elements already
+    // in the viewport on initial page load. Check immediately and bail early.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

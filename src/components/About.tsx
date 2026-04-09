@@ -23,10 +23,7 @@ export default function About() {
       style={{ maxWidth: "1100px" }}
     >
       <AnimateIn>
-        <span
-          className="label-badge"
-          style={{ marginBottom: "48px", display: "inline-flex" }}
-        >
+        <span className="label-badge mb-6 md:mb-12">
           About
         </span>
       </AnimateIn>

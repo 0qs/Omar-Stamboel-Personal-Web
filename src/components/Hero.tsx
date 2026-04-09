@@ -13,16 +13,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "120px 24px 80px",
-        maxWidth: "1100px",
-        margin: "0 auto",
-        position: "relative",
-      }}
+      className="mx-auto px-6 pt-28 pb-20 md:pt-[120px] md:pb-20 flex flex-col justify-center min-h-screen relative overflow-hidden"
+      style={{ maxWidth: "1100px" }}
     >
       {/* Subtle radial glow */}
       <div
