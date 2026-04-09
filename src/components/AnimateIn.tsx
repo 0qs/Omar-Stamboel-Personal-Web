@@ -22,25 +22,34 @@ export default function AnimateIn({
     const el = ref.current;
     if (!el) return;
 
-    // iOS Safari fix: IntersectionObserver may not fire for elements already
-    // in the viewport on initial page load. Check immediately and bail early.
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+    const show = () => {
       setVisible(true);
-      return;
-    }
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
 
+    // Already in viewport on load (fixes iOS Safari initial-load issue)
+    const inView = () => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom >= 0;
+    };
+    if (inView()) { setVisible(true); return; }
+
+    // IntersectionObserver for scroll-in
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) show(); },
       { threshold }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Fallback scroll listener — iOS Safari sometimes skips IntersectionObserver
+    const onScroll = () => { if (inView()) show(); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [threshold]);
 
   return (
