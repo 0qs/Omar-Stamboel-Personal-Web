@@ -12,11 +12,19 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onResize = () => setIsDesktop(window.innerWidth >= 768);
+
+    onResize(); // set immediately on mount
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   return (
@@ -28,15 +36,14 @@ export default function Navbar() {
         right: 0,
         zIndex: 50,
         transition: "all 0.3s ease",
-        background: scrolled
-          ? "rgba(0, 0, 0, 0.8)"
-          : "transparent",
+        background: scrolled ? "rgba(0,0,0,0.85)" : "transparent",
         backdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
         borderBottom: scrolled
-          ? "1px solid rgba(255, 255, 255, 0.06)"
+          ? "1px solid rgba(255,255,255,0.06)"
           : "1px solid transparent",
       }}
     >
+      {/* Bar */}
       <div
         style={{
           maxWidth: "1100px",
@@ -58,175 +65,182 @@ export default function Navbar() {
             color: "#ededed",
             letterSpacing: "0.04em",
             textDecoration: "none",
-            transition: "color 0.2s",
+            whiteSpace: "nowrap",
           }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.color = "#0070f3")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.color = "#ededed")
-          }
         >
           Omar Stamboel
         </a>
 
-        {/* Desktop links */}
-        <ul
-          style={{
-            display: "flex",
-            gap: "32px",
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-          }}
-          className="hidden md:flex"
-        >
-          {links.map((link) => (
-            <li key={link.label}>
+        {isDesktop ? (
+          <>
+            {/* Desktop nav links */}
+            <ul
+              style={{
+                display: "flex",
+                gap: "32px",
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              {links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      fontFamily: "var(--font-geist-sans)",
+                      fontSize: "14px",
+                      color: "#888888",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color = "#ededed")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color = "#888888")
+                    }
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Desktop CTA */}
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <a
+                href="https://www.linkedin.com/in/omar-stamboel-a46332330/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                style={{ fontSize: "13px", padding: "7px 14px", borderRadius: "8px", gap: "6px" }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="mailto:omarmaliq27@gmail.com"
+                className="btn-primary"
+                style={{ fontSize: "13px", padding: "7px 14px", borderRadius: "8px" }}
+              >
+                Get in Touch
+              </a>
+            </div>
+          </>
+        ) : (
+          /* Mobile hamburger */
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "6px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+            }}
+          >
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                background: "#ededed",
+                borderRadius: "2px",
+                transition: "transform 0.25s ease, opacity 0.25s ease",
+                transform: menuOpen ? "rotate(45deg) translate(4.5px, 4.5px)" : "none",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                background: "#ededed",
+                borderRadius: "2px",
+                transition: "opacity 0.25s ease",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                background: "#ededed",
+                borderRadius: "2px",
+                transition: "transform 0.25s ease, opacity 0.25s ease",
+                transform: menuOpen ? "rotate(-45deg) translate(4.5px, -4.5px)" : "none",
+              }}
+            />
+          </button>
+        )}
+      </div>
+
+      {/* Mobile dropdown menu */}
+      {!isDesktop && (
+        <div
+          style={{
+            overflow: "hidden",
+            maxHeight: menuOpen ? "320px" : "0",
+            transition: "max-height 0.3s ease",
+            background: "rgba(0,0,0,0.96)",
+            borderBottom: menuOpen
+              ? "1px solid rgba(255,255,255,0.06)"
+              : "none",
+          }}
+        >
+          <div style={{ padding: "8px 24px 24px" }}>
+            {links.map((link) => (
+              <a
+                key={link.label}
                 href={link.href}
+                onClick={() => setMenuOpen(false)}
                 style={{
-                  fontFamily: "var(--font-geist-sans)",
-                  fontSize: "14px",
+                  display: "block",
+                  padding: "12px 0",
+                  fontSize: "16px",
                   color: "#888888",
                   textDecoration: "none",
+                  borderBottom: "1px solid rgba(255,255,255,0.04)",
+                  fontFamily: "var(--font-geist-sans)",
                   transition: "color 0.2s",
                 }}
-                onMouseEnter={(e) =>
+                onTouchStart={(e) =>
                   ((e.currentTarget as HTMLElement).style.color = "#ededed")
                 }
-                onMouseLeave={(e) =>
+                onTouchEnd={(e) =>
                   ((e.currentTarget as HTMLElement).style.color = "#888888")
                 }
               >
                 {link.label}
               </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Right actions */}
-        <div className="hidden md:flex items-center" style={{ gap: "10px" }}>
-          <a
-            href="https://www.linkedin.com/in/omar-stamboel-a46332330/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary"
-            style={{ fontSize: "13px", padding: "7px 14px", borderRadius: "8px", gap: "6px" }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            LinkedIn
-          </a>
-          <a
-            href="mailto:omarmaliq27@gmail.com"
-            className="btn-primary"
-            style={{ fontSize: "13px", padding: "7px 14px", borderRadius: "8px" }}
-          >
-            Get in Touch
-          </a>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-          style={{ background: "none", border: "none", cursor: "pointer" }}
-        >
-          <span
-            style={{
-              display: "block",
-              width: "20px",
-              height: "1px",
-              background: "#ededed",
-              transition: "all 0.3s",
-              transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "none",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "20px",
-              height: "1px",
-              background: "#ededed",
-              transition: "all 0.3s",
-              opacity: menuOpen ? 0 : 1,
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "20px",
-              height: "1px",
-              background: "#ededed",
-              transition: "all 0.3s",
-              transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "none",
-            }}
-          />
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        style={{
-          overflow: "hidden",
-          maxHeight: menuOpen ? "240px" : "0",
-          transition: "max-height 0.3s ease",
-          background: "rgba(0,0,0,0.95)",
-          borderBottom: menuOpen ? "1px solid rgba(255,255,255,0.06)" : "none",
-        }}
-        className="md:hidden"
-      >
-        <ul
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: "16px 24px 24px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-          }}
-        >
-          {links.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  fontFamily: "var(--font-geist-sans)",
-                  fontSize: "15px",
-                  color: "#888888",
-                  textDecoration: "none",
-                  display: "block",
-                  padding: "4px 0",
-                }}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-          <li>
+            ))}
             <a
               href="mailto:omarmaliq27@gmail.com"
+              onClick={() => setMenuOpen(false)}
               style={{
-                display: "inline-block",
-                marginTop: "8px",
-                padding: "8px 16px",
+                display: "inline-flex",
+                marginTop: "16px",
+                padding: "10px 20px",
                 background: "#ffffff",
                 color: "#000000",
                 borderRadius: "8px",
-                fontSize: "13px",
+                fontSize: "14px",
                 fontWeight: 500,
                 textDecoration: "none",
               }}
             >
               Get in Touch
             </a>
-          </li>
-        </ul>
-      </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
