@@ -43,9 +43,8 @@ export default function Hero() {
       <div style={{ position: "relative", zIndex: 1 }}>
         {/* Status badge */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"
-          }`}
+          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"
+            }`}
           style={{ marginBottom: "32px" }}
         >
           <span className="label-badge">
@@ -65,9 +64,8 @@ export default function Hero() {
 
         {/* Name */}
         <div
-          className={`transition-all duration-1000 ease-out ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`transition-all duration-1000 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <h1
             className="gradient-text"
@@ -87,9 +85,8 @@ export default function Hero() {
 
         {/* Divider */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            mounted ? "opacity-100" : "opacity-0"
-          }`}
+          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100" : "opacity-0"
+            }`}
           style={{
             transitionDelay: "300ms",
             margin: "40px 0",
@@ -101,9 +98,8 @@ export default function Hero() {
 
         {/* Subtitle */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
+          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
           style={{
             transitionDelay: "400ms",
             display: "flex",
@@ -121,7 +117,7 @@ export default function Hero() {
               lineHeight: 1.5,
             }}
           >
-            IT Strategy &amp; UI/UX ·{" "}
+            Technology Consultant ·{" "}
             <span style={{ color: "#ededed" }}>
               Information Systems, BINUS University
             </span>
@@ -141,9 +137,8 @@ export default function Hero() {
 
         {/* CTA buttons */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
+          className={`transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
           style={{
             transitionDelay: "550ms",
             display: "flex",
@@ -199,9 +194,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className={`transition-all duration-700 ease-out ${
-          mounted ? "opacity-100" : "opacity-0"
-        }`}
+        className={`transition-all duration-700 ease-out ${mounted ? "opacity-100" : "opacity-0"
+          }`}
         style={{
           transitionDelay: "800ms",
           position: "absolute",

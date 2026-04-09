@@ -12,7 +12,7 @@ const experiences = [
     location: "Jakarta, Indonesia",
     points: [
       "Supported a digital transformation project for the payment operations division of a major Indonesian SOE bank, focusing on streamlining system workflows and dashboards.",
-      "Managed the full SDLC of requirement gathering — from user interviews and defining functional specs to coordinating grooming, development, testing, and supporting deployment and piloting.",
+      "Managed the full SDLC of requirement gathering, from user interviews and defining functional specs to coordinating grooming, development, testing, and supporting deployment and piloting.",
       "Developed practical recommendations for the client based on user insights and feature analysis to guide decision-making throughout the project.",
       "Collaborated with cross-functional teams in a fast-paced professional services environment, demonstrating strong written and verbal communication in English and Bahasa Indonesia.",
     ],
