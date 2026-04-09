@@ -16,11 +16,15 @@ export default function AnimateIn({
   threshold = 0.08,
 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Start visible — content is always shown, animation is progressive enhancement only
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Reset to hidden so we can animate in
+    setVisible(false);
 
     const show = () => {
       setVisible(true);
@@ -28,21 +32,22 @@ export default function AnimateIn({
       window.removeEventListener("scroll", onScroll);
     };
 
-    // Already in viewport on load (fixes iOS Safari initial-load issue)
     const inView = () => {
       const r = el.getBoundingClientRect();
       return r.top < window.innerHeight && r.bottom >= 0;
     };
-    if (inView()) { setVisible(true); return; }
 
-    // IntersectionObserver for scroll-in
+    if (inView()) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) show(); },
       { threshold }
     );
     observer.observe(el);
 
-    // Fallback scroll listener — iOS Safari sometimes skips IntersectionObserver
     const onScroll = () => { if (inView()) show(); };
     window.addEventListener("scroll", onScroll, { passive: true });
 
