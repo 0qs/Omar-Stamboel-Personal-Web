@@ -19,12 +19,8 @@ export default function About() {
   return (
     <section
       id="about"
-      style={{
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "96px 24px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
+      className="mx-auto px-6 py-16 md:py-24 border-t border-white/[0.06]"
+      style={{ maxWidth: "1100px" }}
     >
       <AnimateIn>
         <span
@@ -36,13 +32,7 @@ export default function About() {
       </AnimateIn>
 
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "64px",
-          marginTop: "12px",
-          alignItems: "start",
-        }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mt-3 items-start"
       >
         {/* Left: bio */}
         <div>
@@ -50,18 +40,14 @@ export default function About() {
             <h2
               className="gradient-text"
               style={{
-                fontSize: "clamp(26px, 3vw, 40px)",
+                fontSize: "clamp(24px, 4vw, 40px)",
                 fontWeight: 600,
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
                 marginBottom: "24px",
               }}
             >
-              Building systems at the
-              <br />
-              intersection of finance
-              <br />
-              &amp; technology.
+              Building systems at the intersection of finance &amp; technology.
             </h2>
           </AnimateIn>
           <AnimateIn delay={160}>
@@ -231,11 +217,10 @@ export default function About() {
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
+                  className="px-2 sm:px-4 py-5 text-center"
                   style={{
-                    padding: "20px 16px",
                     borderLeft:
                       i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                    textAlign: "center",
                   }}
                 >
                   <p
