@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,8 +16,8 @@ model Experience {
   period   String
   status   String @default("past")
   location String
-  points   String // JSON-encoded string[]
-  tags     String // JSON-encoded string[]
+  points   String
+  tags     String
   order    Int    @default(0)
 }
 
