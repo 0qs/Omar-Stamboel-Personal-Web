@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Experience {
+  id       Int    @id @default(autoincrement())
+  company  String
+  abbr     String
+  logo     String
+  role     String
+  period   String
+  status   String @default("past")
+  location String
+  points   String
+  tags     String
+  order    Int    @default(0)
+}
+
+model Skill {
+  id       Int    @id @default(autoincrement())
+  name     String
+  category String
+  order    Int    @default(0)
+}
+
+model Stat {
+  id    Int    @id @default(autoincrement())
+  value String
+  label String
+  order Int    @default(0)
+}
