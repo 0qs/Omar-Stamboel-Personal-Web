@@ -1,38 +1,19 @@
 import AnimateIn from "./AnimateIn";
 
-const skillGroups = [
-  {
-    category: "Development",
-    items: ["JavaScript", "Java", "HTML / CSS", "Web Development", "React / Next.js"],
-  },
-  {
-    category: "Design",
-    items: ["UI/UX Design", "Wireframing", "Prototyping", "User Research", "User-Centred Design"],
-  },
-  {
-    category: "Consulting",
-    items: ["IT Strategy", "SDLC Management", "Requirement Gathering", "Process Design", "Stakeholder Communication"],
-  },
-  {
-    category: "Tools",
-    items: ["Microsoft 365", "Word & Excel", "PowerPoint", "Teams", "Figma"],
-  },
-];
+const SKILL_SECTION_CATEGORIES = ["Development", "Design", "Consulting", "Tools"];
 
-const allTech = [
-  "JavaScript",
-  "Java",
-  "HTML",
-  "CSS",
-  "React",
-  "Next.js",
-  "Figma",
-  "Microsoft 365",
-  "Git",
-  "SQL",
-];
+export type SkillData = { id: number; name: string; category: string };
 
-export default function Skills() {
+export default function Skills({ skills }: { skills: SkillData[] }) {
+  const skillGroups = SKILL_SECTION_CATEGORIES.map((cat) => ({
+    category: cat,
+    items: skills.filter((s) => s.category === cat).map((s) => s.name),
+  }));
+
+  const allTech = skills
+    .filter((s) => s.category === "Technology")
+    .map((s) => s.name);
+
   return (
     <section
       id="skills"
@@ -129,32 +110,31 @@ export default function Skills() {
       </div>
 
       {/* Tech pills */}
-      <AnimateIn delay={400}>
-        <div
-          className="card"
-          style={{ padding: "20px 24px" }}
-        >
-          <p
-            style={{
-              fontFamily: "var(--font-geist-mono)",
-              fontSize: "11px",
-              color: "#444444",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              marginBottom: "14px",
-            }}
-          >
-            Technologies
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-            {allTech.map((tech) => (
-              <span key={tech} className="tag">
-                {tech}
-              </span>
-            ))}
+      {allTech.length > 0 && (
+        <AnimateIn delay={400}>
+          <div className="card" style={{ padding: "20px 24px" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-geist-mono)",
+                fontSize: "11px",
+                color: "#444444",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                marginBottom: "14px",
+              }}
+            >
+              Technologies
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              {allTech.map((tech) => (
+                <span key={tech} className="tag">
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      </AnimateIn>
+        </AnimateIn>
+      )}
     </section>
   );
 }

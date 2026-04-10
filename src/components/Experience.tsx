@@ -1,41 +1,20 @@
 import Image from "next/image";
 import AnimateIn from "./AnimateIn";
 
-const experiences = [
-  {
-    company: "PwC Southeast Asia Consulting",
-    abbr: "PwC",
-    logo: "/PwCLogo.png",
-    role: "FS Strategy and Operations Intern",
-    period: "Jan 2025 – Dec 2025",
-    status: "past",
-    location: "Jakarta, Indonesia",
-    points: [
-      "Supported a digital transformation project for the payment operations division of a major Indonesian SOE bank, focusing on streamlining system workflows and dashboards.",
-      "Managed the full SDLC of requirement gathering, from user interviews and defining functional specs to coordinating grooming, development, testing, and supporting deployment and piloting.",
-      "Developed practical recommendations for the client based on user insights and feature analysis to guide decision-making throughout the project.",
-      "Collaborated with cross-functional teams in a fast-paced professional services environment, demonstrating strong written and verbal communication in English and Bahasa Indonesia.",
-    ],
-    tags: ["IT Strategy", "Digital Transformation", "SDLC", "Banking", "Consulting"],
-  },
-  {
-    company: "Westbike",
-    abbr: "WB",
-    logo: "/WestbikeLogo.jpeg",
-    role: "UI/UX Designer Intern",
-    period: "Jul 2023 – Dec 2023",
-    status: "past",
-    location: "Jakarta, Indonesia",
-    points: [
-      "Led requirement gathering for Westbike, translating user needs into clear product requirements for workflows and dashboards.",
-      "Designed the UI and UX for Westbike including detailed wireframes for both mobile and desktop platforms, applying user-centred design principles.",
-      "Produced data-driven design recommendations that informed product roadmap decisions, demonstrating analytical thinking and structured problem solving.",
-    ],
-    tags: ["UI/UX Design", "Figma", "Wireframing", "User Research", "Mobile"],
-  },
-];
+export type ExperienceData = {
+  id: number;
+  company: string;
+  abbr: string;
+  logo: string;
+  role: string;
+  period: string;
+  status: string;
+  location: string;
+  points: string[];
+  tags: string[];
+};
 
-export default function Experience() {
+export default function Experience({ experiences }: { experiences: ExperienceData[] }) {
   return (
     <section
       id="work"
@@ -65,7 +44,7 @@ export default function Experience() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {experiences.map((exp, i) => (
-          <AnimateIn key={exp.company} delay={i * 120 + 80}>
+          <AnimateIn key={exp.id} delay={i * 120 + 80}>
             <div
               className="card"
               style={{ display: "flex", flexDirection: "column", height: "100%" }}
@@ -107,6 +86,7 @@ export default function Experience() {
                       width={40}
                       height={40}
                       style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                      unoptimized
                     />
                   </div>
                   <div>

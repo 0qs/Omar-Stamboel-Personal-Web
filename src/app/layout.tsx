@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Omar Stamboel — Technology Consultant",
+  title: "Omar Stamboel — IT Strategy & UI/UX",
   description:
     "Portfolio of Omar Stamboel — Information Systems student at BINUS University, FS Strategy & Operations Intern at PwC SEA, UI/UX Designer. Based in Jakarta, Indonesia.",
   keywords: [
