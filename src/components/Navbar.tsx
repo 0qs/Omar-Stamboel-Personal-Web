@@ -117,7 +117,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger — hidden on desktop via CSS */}
+        {/* Mobile text toggle — hidden on desktop via CSS */}
         <button
           className="flex md:hidden"
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -127,45 +127,17 @@ export default function Navbar() {
             background: "none",
             border: "none",
             cursor: "pointer",
-            padding: "8px",
-            flexDirection: "column",
-            gap: "5px",
+            padding: "4px 0",
             touchAction: "manipulation",
+            fontFamily: "var(--font-geist-mono)",
+            fontSize: "13px",
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            color: menuOpen ? "#ededed" : "#888888",
+            transition: "color 0.2s ease",
           }}
         >
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              background: "#ededed",
-              borderRadius: "2px",
-              transition: "transform 0.25s ease, opacity 0.25s ease",
-              transform: menuOpen ? "rotate(45deg) translate(4.5px, 4.5px)" : "none",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              background: "#ededed",
-              borderRadius: "2px",
-              transition: "opacity 0.25s ease",
-              opacity: menuOpen ? 0 : 1,
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              background: "#ededed",
-              borderRadius: "2px",
-              transition: "transform 0.25s ease, opacity 0.25s ease",
-              transform: menuOpen ? "rotate(-45deg) translate(4.5px, -4.5px)" : "none",
-            }}
-          />
+          {menuOpen ? "close" : "menu"}
         </button>
       </div>
 

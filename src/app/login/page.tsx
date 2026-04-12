@@ -32,7 +32,7 @@ export default function LoginPage() {
           </div>
           {state?.error && <p style={{ fontSize: "13px", color: "#ff4444", marginBottom: "16px" }}>{state.error}</p>}
           <button type="submit" disabled={pending}
-            style={{ width: "100%", background: "#0070f3", border: "none", borderRadius: "8px", padding: "10px 16px", fontSize: "14px", fontWeight: 500, color: "#ffffff", cursor: pending ? "not-allowed" : "pointer", opacity: pending ? 0.6 : 1 }}>
+            style={{ width: "100%", background: "#0070f3", border: "none", borderRadius: "8px", padding: "10px 16px", fontSize: "14px", fontWeight: 500, color: "#ffffff", cursor: pending ? "not-allowed" : "pointer", opacity: pending ? 0.6 : 1, touchAction: "manipulation" }}>
             {pending ? "Signing in…" : "Sign in"}
           </button>
         </form>
