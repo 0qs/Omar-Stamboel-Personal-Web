@@ -1,21 +1,14 @@
 import AnimateIn from "./AnimateIn";
+import { prisma } from "@/lib/prisma";
 
-const stats = [
-  { value: "2026", label: "Expected Graduation" },
-  { value: "2", label: "Internships" },
-  { value: "2+", label: "Years in Tech" },
-];
+export default async function About() {
+  const [stats, focusSkills] = await Promise.all([
+    prisma.stat.findMany({ orderBy: { order: "asc" } }),
+    prisma.skill.findMany({ where: { category: "FocusArea" }, orderBy: { order: "asc" } }),
+  ]);
 
-const focusAreas = [
-  "Banking & FinTech",
-  "IT Strategy",
-  "UI/UX Design",
-  "Digital Transformation",
-  "Application Development",
-  "Cybersecurity",
-];
+  const focusAreas = focusSkills.map((s) => s.name);
 
-export default function About() {
   return (
     <section
       id="about"
@@ -177,73 +170,77 @@ export default function About() {
               </div>
 
               {/* Focus areas */}
-              <div style={{ padding: "20px 24px" }}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-geist-mono)",
-                    fontSize: "11px",
-                    color: "#444444",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    marginBottom: "12px",
-                  }}
-                >
-                  Focus Areas
-                </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                  {focusAreas.map((area) => (
-                    <span key={area} className="tag">
-                      {area}
-                    </span>
-                  ))}
+              {focusAreas.length > 0 && (
+                <div style={{ padding: "20px 24px" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-geist-mono)",
+                      fontSize: "11px",
+                      color: "#444444",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Focus Areas
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                    {focusAreas.map((area) => (
+                      <span key={area} className="tag">
+                        {area}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </AnimateIn>
 
           {/* Stats */}
-          <AnimateIn delay={200}>
-            <div
-              className="card"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                overflow: "hidden",
-              }}
-            >
-              {stats.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className="px-2 sm:px-4 py-5 text-center"
-                  style={{
-                    borderLeft:
-                      i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                  }}
-                >
-                  <p
+          {stats.length > 0 && (
+            <AnimateIn delay={200}>
+              <div
+                className="card"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${stats.length}, 1fr)`,
+                  overflow: "hidden",
+                }}
+              >
+                {stats.map((stat, i) => (
+                  <div
+                    key={stat.id}
+                    className="px-2 sm:px-4 py-5 text-center"
                     style={{
-                      fontFamily: "var(--font-geist-mono)",
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      color: "#0070f3",
-                      marginBottom: "4px",
+                      borderLeft:
+                        i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
                     }}
                   >
-                    {stat.value}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "11px",
-                      color: "#444444",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </AnimateIn>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-geist-mono)",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        color: "#0070f3",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {stat.value}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "11px",
+                        color: "#444444",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </AnimateIn>
+          )}
         </div>
       </div>
     </section>
