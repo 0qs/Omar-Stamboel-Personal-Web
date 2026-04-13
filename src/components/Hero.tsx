@@ -22,30 +22,6 @@ export default function Hero() {
       />
 
       <div style={{ position: "relative", zIndex: 1 }}>
-        {/* Status badge */}
-        <div
-          className="hero-animate"
-          style={{
-            marginBottom: "32px",
-            animation: "hero-fade-down 0.7s ease-out both",
-            animationDelay: "0ms",
-          }}
-        >
-          <span className="label-badge">
-            <span
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#00b14f",
-                display: "inline-block",
-                boxShadow: "0 0 6px rgba(0,177,79,0.8)",
-              }}
-            />
-            Available for opportunities
-          </span>
-        </div>
-
         {/* Name */}
         <div
           className="hero-animate"
